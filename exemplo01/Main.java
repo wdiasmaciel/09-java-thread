@@ -11,7 +11,7 @@ public class Main {
         t1.start();
         
         // Pequena espera para garantir que a Thread A comece primeiro:
-        try { Thread.sleep(100); } catch (Exception e) {e.printStackTrace();} 
+        //try { Thread.sleep(100); } catch (Exception e) {e.printStackTrace();} 
         
         t2.start();
     }

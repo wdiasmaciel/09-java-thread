@@ -9,7 +9,7 @@ public class Tarefa {
 
         try {
             // Tenta pegar o cadeado. Se estiver ocupado, espera no máximo 2 segundos.
-            if (mutex.tryLock(2, TimeUnit.SECONDS)) {
+            if (mutex.tryLock()) {
                 try {
                     // --- REGIÃO CRÍTICA ---
                     System.out.println(nome + " conseguiu trancar o Mutex e entrou na seção crítica!");
