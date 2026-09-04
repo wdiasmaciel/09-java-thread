@@ -4,11 +4,11 @@ import java.util.concurrent.locks.ReentrantLock;
 public class Tarefa {
     private final ReentrantLock mutex = new ReentrantLock();
 
-    public void processarComTimeout(String nome) {
+    public void processarSemTimeout(String nome) {
         System.out.println(nome + " tentando pegar o Mutex...");
 
         try {
-            // Tenta pegar o cadeado. Se estiver ocupado, espera no máximo 2 segundos.
+            // Tenta pegar o cadeado. Se estiver ocupado, desiste imediatamente.
             if (mutex.tryLock()) {
                 try {
                     // --- REGIÃO CRÍTICA ---
@@ -19,7 +19,7 @@ public class Tarefa {
                     System.out.println(nome + " liberou o Mutex.");
                 }
             } else {
-                // Se passarem 2 segundos e o cadeado continuar ocupado:
+                // Passarem 2 segundos e o cadeado continuar ocupado:
                 System.out.println(nome + " CANCELOU a operação: tempo limite de espera esgotado!");
             }
         } catch (InterruptedException e) {
