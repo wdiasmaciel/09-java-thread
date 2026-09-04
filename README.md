@@ -51,7 +51,7 @@ Um grupo de jogadores (threads) está participando de um jogo de tabuleiro coope
 
 Crie a classe da Tarefa (O Jogador). Antes de acessar a região crítica, a classe Tarefa deve gerar um número inteiro aleatório entre 1 e 6 (simulando a rolagem do dado). Esse número gerado deve ser passado como o parâmetro. Na seção crítica, antes de somar, use uma estrutura condicional para verificar se o contador atual ainda é menor que o valor alvo (100). 
 
--Se for menor: adicione o valor do dado ao contador e apresente na tela: "[JOGADA] [Nome da Thread] somou X. Total do grupo: Y/100". Logo em seguida, verifique se essa jogada específica bateu ou passou de 100. Se sim, exiba a mensagem: "[VITÓRIA] [Nome da Thread] fez o grupo atingir o objetivo!". 
+- Se for menor: adicione o valor do dado ao contador e apresente na tela: "[JOGADA] [Nome da Thread] somou X. Total do grupo: Y/100". Logo em seguida, verifique se essa jogada específica bateu ou passou de 100. Se sim, exiba a mensagem: "[VITÓRIA] [Nome da Thread] fez o grupo atingir o objetivo!". 
  
 - Se não for menor (o grupo já ganhou): não faça alteração e apenas exiba: "[FIM DE JOGO] [Nome da Thread] tentou jogar, mas a pontuação máxima já foi atingida.".
  
