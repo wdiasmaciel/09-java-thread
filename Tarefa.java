@@ -4,7 +4,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class Tarefa {
     private final ReentrantLock mutex = new ReentrantLock();
 
-    public void Tarefa(String nome) {
+    public void processarComTimeout(String nome) {
         System.out.println(nome + " tentando pegar o Mutex...");
 
         try {
