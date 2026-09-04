@@ -49,4 +49,14 @@ Sistemas de bancos de dados relacionais e emissores de nota fiscal precisam gera
 9. **Gravação de Mensagens em Arquivo de Log Compartilhado (Com Timeout)***
 Em servidores corporativos, diferentes microsserviços (módulo de autenticação, módulo de vendas, módulo de frete) gravam suas atividades em um único arquivo texto centralizado de Log (log.txt). Se as threads escreverem juntas sem sincronização, os caracteres e palavras vão se misturar, tornando o arquivo ilegível. Cada módulo aceita esperar apenas um breve momento para registrar o log, caso contrário, joga a mensagem no console local para não atrasar o sistema. Crie uma classe chamada GerenciadorLog com um método registrarLog(String mensagem). Use um Mutex para proteger a escrita. A tentativa de tranca deve usar `tryLock(500, TimeUnit.MILLISECONDS)` (tolerância de apenas 500 milissegundos). Na seção crítica, simule a escrita lenta imprimindo: "[INÍCIO LOG] " + mensagem, faça a thread dormir por 800 milissegundos (`Thread.sleep(800)`) e depois imprima "[FIM LOG]". Instancie 3 threads (representando os módulos do sistema) disparando mensagens de log ao mesmo tempo. As threads que não conseguirem entrar no arquivo dentro do limite de 500ms devem rodar o bloco de falha e exibir: "[Módulo X] Timeout de arquivo! Log descartado/redirecionado para o console local."
 
-  
+10. **Jogo de Dados Concorrente**
+
+Um grupo de jogadores (threads) está participando de um jogo de tabuleiro cooperativo. O objetivo do grupo é fazer com que um contador de pontos central atinja ou ultrapasse exatamente o valor alvo de 100 pontos. Cada jogador, na sua vez, joga um dado de 6 lados (gerando um número aleatório de 1 a 6) e adiciona o resultado ao painel geral. O jogo deve encerrar imediatamente assim que os 100 pontos forem alcançados. Se algum jogador tentar jogar após a vitória do grupo, o sistema deve avisar que o jogo já acabou.
+
+Crie a classe da Tarefa (O Jogador). Antes de acessar a região crítica, a classe Tarefa deve gerar um número inteiro aleatório entre 1 e 6 (simulando a rolagem do dado). Esse número gerado deve ser passado como o parâmetro. Na seção crítica, antes de somar, use uma estrutura condicional para verificar se o contador atual ainda é menor que o valor alvo (100). 
+
+-Se for menor: adicione o valor do dado ao contador e apresente na tela: "[JOGADA] [Nome da Thread] somou X. Total do grupo: Y/100". Logo em seguida, verifique se essa jogada específica bateu ou passou de 100. Se sim, exiba a mensagem: "[VITÓRIA] [Nome da Thread] fez o grupo atingir o objetivo!". 
+ 
+- Se não for menor (o grupo já ganhou): não faça alteração e apenas exiba: "[FIM DE JOGO] [Nome da Thread] tentou jogar, mas a pontuação máxima já foi atingida.".
+ 
+O jogo deve ser executado quantas vezes o usuário desejar.
