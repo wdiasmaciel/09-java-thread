@@ -19,8 +19,7 @@ public class Tarefa {
                     System.out.println(nome + " liberou o Mutex.");
                 }
             } else {
-                // Passarem 2 segundos e o cadeado continuar ocupado:
-                System.out.println(nome + " CANCELOU a operação: tempo limite de espera esgotado!");
+                System.out.println(nome + " CANCELOU a operação!");
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
